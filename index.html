@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Engine Simulator</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="labels"></div>
+
+<header class="brand">
+  <span class="dot"></span>
+  <div>
+    <h1>ENGINE SIMULATOR</h1>
+    <p>explore how car engines work</p>
+  </div>
+</header>
+
+<nav id="tabs" class="tabs"></nav>
+
+<aside class="panel controls">
+  <button id="startBtn" class="start">START ENGINE</button>
+
+  <label class="row"><span>Throttle</span><b id="thrVal">0%</b></label>
+  <input id="throttle" type="range" min="0" max="100" value="0">
+
+  <label class="row"><span>Shaft angle</span><b id="angVal">0&deg;</b></label>
+  <input id="angle" type="range" min="0" max="720" value="0" step="1">
+
+  <label class="row"><span>Exploded view</span><b id="expVal">0%</b></label>
+  <input id="explode" type="range" min="0" max="100" value="0">
+
+  <label class="row"><span>Time scale</span></label>
+  <select id="timeScale">
+    <option value="0.02">1/50 &middot; slow motion</option>
+    <option value="0.05" selected>1/20</option>
+    <option value="0.1">1/10</option>
+    <option value="0.2">1/5</option>
+  </select>
+
+  <label class="check"><input id="cutaway" type="checkbox" checked><span>Cutaway (see-through casing)</span></label>
+  <label class="check"><input id="showLabels" type="checkbox"><span>Part labels</span></label>
+  <label class="check"><input id="sound" type="checkbox"><span>Engine sound</span></label>
+
+  <p class="hint">Drag to rotate &middot; scroll to zoom &middot; click a part &middot; <kbd>Space</kbd> start/stop &middot; <kbd>1</kbd>-<kbd>4</kbd> switch engine</p>
+</aside>
+
+<aside class="panel right">
+  <section>
+    <h2 id="engName" class="eng">Inline-4</h2>
+    <p id="engTag" class="tag"></p>
+    <p id="engHow" class="how"></p>
+    <p class="meta"><b>Found in:</b> <span id="engCars"></span></p>
+    <p class="meta"><span id="engSpec"></span></p>
+  </section>
+  <section id="info">
+    <h3>Selected part</h3>
+    <h2 id="infoName">Click a part</h2>
+    <p id="infoDesc">Select any component to see what it does. Hover to highlight it.</p>
+  </section>
+  <section>
+    <h3>Four-stroke cycle <small id="cycleSub">(720&deg; of shaft turn)</small></h3>
+    <canvas id="cycle" width="320" height="140"></canvas>
+    <div class="legend">
+      <i style="--c:#ff7a1a"></i>Power
+      <i style="--c:#9aa0a8"></i>Exhaust
+      <i style="--c:#6ec8ff"></i>Intake
+      <i style="--c:#ffe08a"></i>Compression
+    </div>
+  </section>
+</aside>
+
+<div class="hud">
+  <div class="rpm"><b id="rpm">0</b><span>RPM</span></div>
+  <div class="cyls" id="cyls"></div>
+</div>
+
+<script src="lib/three.min.js"></script>
+<script src="lib/OrbitControls.js"></script>
+<script src="engine.js"></script>
+<script src="rotary.js"></script>
+<script src="audio.js"></script>
+<script src="ui.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
